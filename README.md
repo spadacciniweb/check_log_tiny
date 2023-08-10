@@ -9,7 +9,7 @@ $ vi etc/objects/commands.cfg
 ...
 define command {    
     command_name    check_log_tiny
-    command_line    $USER1$/check_log_tiny -F $ARG1$ -q $ARG3$
+    command_line    $USER1$/check_log_tiny -F $ARG1$ -q $ARG2$
 }
 ...
 ----------------------------------------------------
@@ -19,7 +19,7 @@ $ vi etc/objects/servers/${YOUR_SERVER}.cfg
 ...
 define service {
     use                     $TEMPLATE
-    host_name               $YOUR_SERVER_IP
+    host_name               $YOUR_SERVER
     service_description     CHECK VERY_IMPORTANT_LOG
     check_command           check_log_tiny!/var/log/${YOUR_LOG}.log!ERROR
 }
