@@ -40,7 +40,16 @@ PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
 
 export PATH
 
-. "$PROGPATH"/utils.sh
+if test -f "$PROGPATH"/utils.sh; then
+    . "$PROGPATH"/utils.sh
+    exitstatus=$STATE_WARNING #default
+else
+    STATE_OK=0
+    STATE_WARNING=1
+    STATE_CRITICAL=2
+    STATE_UNKNOWN=3
+    STATE_DEPENDENT=4
+fi
 
 print_usage() {
     echo "Usage: $PROGNAME -F logfile -q query"
@@ -73,7 +82,6 @@ fi
 
 #logfile=$1
 #query=$2
-exitstatus=$STATE_WARNING #default
 while test -n "$1"; do
     case "$1" in
         --help)
